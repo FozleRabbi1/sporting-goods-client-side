@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+// import TextTransition, { presets } from "react-text-transition";
+import TextTransition from "react-text-transition";
+import "./NavBar.css";
+
+const TEXTS = ["Sports Store.", "Sports Store..", "Sports Store..."];
 
 const NavBar = () => {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const intervalId = setInterval(() => setIndex((index) => index + 1), 4000);
+    return () => clearTimeout(intervalId);
+  }, []);
+
   return (
     <div>
-      <div className="navbar bg-base-100 p-0">
-        <div className="navbar-start">
-          <div className="dropdown">
+      <div className="navbar bg-base-100 px-0 py-3">
+        <div className="navbar-start w-full md:w-[40%]">
+          <div className="dropdown z-30">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,38 +39,60 @@ const NavBar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
+                <NavLink to="all-products">All-Products</NavLink>
               </li>
               <li>
-                <a>Item 3</a>
+                <NavLink to="about-us">About-Us</NavLink>
+              </li>
+              <li>
+                <NavLink to="manage-product">Manage-product</NavLink>
               </li>
             </ul>
           </div>
-          <NavLink to="/">Icon</NavLink>
+          <NavLink to="/" className="flex items-center ">
+            {" "}
+            <img
+              className="size-14 border rounded-full shadow-xl"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWnoyJnn5aANyBkN0d7ErHjkBwBGSv6MbZA&s"
+              alt=""
+            />{" "}
+            {/* <h2>Sports Store</h2> */}
+            <TextTransition
+              className="text-2xl font-bold ml-4  "
+              // springConfig={presets.wobbly}
+              springConfig={{ tension: 160, friction: 30 }}
+            >
+              {TEXTS[index % TEXTS.length]}
+            </TextTransition>
+          </NavLink>
         </div>
 
-        <div className="navbar-end hidden lg:flex">
-          <NavLink className="ml-3" to="/">
+        <div className="navbar-end hidden  lg:flex w-full">
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className="ml-3" to="all-products">
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="all-products"
+          >
             All-Products
           </NavLink>
-          <NavLink className="ml-3" to="about-us">
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="about-us"
+          >
             About-Us
           </NavLink>
-          <NavLink className="ml-3" to="manage-product">
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="manage-product"
+          >
             Manage-product
           </NavLink>
         </div>
