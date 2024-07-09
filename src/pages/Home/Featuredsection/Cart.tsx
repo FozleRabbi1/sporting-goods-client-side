@@ -18,11 +18,13 @@ const Cart = (data: any) => {
   return (
     <div data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
       <div className="card border overflow-hidden group" key={data._id}>
-        <img
-          className="h-[300px] w-[100%] mx-auto rounded-t-md transform transition-transform duration-500 group-hover:scale-110"
-          src={image}
-          alt=""
-        />
+        <div className="h-[300px] w-[100%] overflow-hidden">
+          <img
+            className="h-[100%] w-[100%] mx-auto rounded-t-md transform transition-transform duration-500 group-hover:scale-110"
+            src={image}
+            alt=""
+          />
+        </div>
         <div className="card-content p-2">
           <h2 className="card-title">{name}</h2>
           <p className="card-description text-[14px] opacity-90">

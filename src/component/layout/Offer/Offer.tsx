@@ -8,9 +8,10 @@ const Offer = () => {
     <div className={`${isHidden} relative bg-black text-[#00FFFF] p-1`}>
       <Marquee>
         <h2>
-          Enjoy 15% Off Your Next Purchase! As a token of our appreciation,
-          Don't miss out on this limited-time offer! Use Code: SAVE15 at
-          checkout.
+          Enjoy{" "}
+          <span className="text-[#FF00FF] text-lg font-semibold">15%</span> Off
+          Your Next Purchase! As a token of our appreciation, Don't miss out on
+          this limited-time offer! Use Code: SAVE15 at checkout.
         </h2>
       </Marquee>
       <div
