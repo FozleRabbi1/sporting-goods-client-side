@@ -3,6 +3,8 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import Main from "../component/layout/Main";
 import Home from "../pages/Home/Home";
 import AllProducts from "../pages/AllProducts/AllProducts";
+import ManageProducts from "../pages/ManageProducts/ManageProducts";
+import NotFound from "../pages/NotFound/NotFound";
 
 const routes = createBrowserRouter([
   {
@@ -21,7 +23,15 @@ const routes = createBrowserRouter([
         path: "all-products",
         element: <AllProducts />,
       },
+      {
+        path: "manage-product",
+        element: <ManageProducts />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
