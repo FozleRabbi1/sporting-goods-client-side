@@ -45,7 +45,7 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Icon</NavLink>
         </div>
 
         <div className="navbar-end hidden lg:flex">
