@@ -1,13 +1,10 @@
-import { allProducts } from "../../redux/fetures/getAllProducts";
+import { useParams } from "react-router-dom";
+import { AllCategories } from "../../redux/fetures/getCategories";
 import Cart from "../Home/Featuredsection/Cart";
 
-const AllProducts = () => {
-  // const params = useParams();
-  const { data, isLoading } = allProducts.useGetAllProductsQuery(undefined);
-
-  if (isLoading) {
-    return <p>Loading ...</p>;
-  }
+const Categories = () => {
+  const params = useParams();
+  const { data } = AllCategories.useGetCategoriesQuery(params?.category);
 
   return (
     <div>
@@ -20,4 +17,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default Categories;

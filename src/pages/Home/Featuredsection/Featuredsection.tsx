@@ -24,7 +24,7 @@ const Featuredsection = () => {
       <div className="flex justify-center gap-4 py-8">
         {uniqueCategories.map((item) => (
           <NavLink
-            to={`/all-products/${item}`}
+            to={`/catories/${item}`}
             className=" text-center bg-slate-400 w-[120px] p-1 rounded mb-5 text-xl font-semibold"
           >
             {item}
