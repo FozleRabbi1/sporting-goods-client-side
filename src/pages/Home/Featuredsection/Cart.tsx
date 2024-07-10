@@ -31,6 +31,7 @@ const Cart = (data: any) => {
             {description}
           </p>
           <Rating
+            readonly
             placeholderRating={rating}
             emptySymbol={<CiStar />}
             placeholderSymbol={<FaStar className="text-yellow-500" />}
