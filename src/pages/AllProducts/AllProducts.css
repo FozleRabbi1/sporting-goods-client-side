@@ -1,0 +1,8 @@
+.queryStyle {
+  border: 2px solid gray;
+  /* background-color: aqua; */
+  display: block;
+  width: 25%;
+  margin-bottom: 4px;
+  padding: 3px;
+}

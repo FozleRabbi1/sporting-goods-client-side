@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "../Home/Featuredsection/Cart";
 import { RouterProduct } from "../../redux/fetures/get-AllProducts";
 import "react-range-slider-input/dist/style.css";
 import { useForm } from "react-hook-form";
 
 const AllProducts = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [reating, setReating] = useState(null);
   const [price, setPrice] = useState({});
 
   let newData;
-  const { data, isLoading } = RouterProduct.useGetAllRouterProductsQuery({
-    selectedCategory,
-    minPrice: price.min,
-    maxPrice: price.max,
-  });
+  const { data, isLoading, refetch } =
+    RouterProduct.useGetAllRouterProductsQuery({
+      selectedCategory,
+      minPrice: price.min,
+      maxPrice: price.max,
+      reating,
+    });
   newData = data?.data;
 
   if (isLoading) {
@@ -22,25 +25,51 @@ const AllProducts = () => {
   }
 
   const handleCategory = (event) => {
+    setPrice({});
     setSelectedCategory(event.target.value);
+    reset();
+  };
+
+  const handleReating = (event) => {
+    setPrice({});
+    setReating(event.target.value);
+    reset();
   };
   const onSubmit = (data) => {
     setSelectedCategory("");
     setPrice(data);
+    reset();
+  };
+
+  const handleShowAll = () => {
+    setSelectedCategory("");
+    setPrice({});
+    refetch();
   };
 
   return (
     <div>
-      <div className="flex justify-end pt-5 px-20">
-        <div className="w-[250px]  flex flex-col justify-end ">
+      <div className="flex flex-col lg:flex-row justify-between md:justify-end pt-5 px-5 lg:px-20 ">
+        <div className="flex justify-end mb-2 lg:mb-0 lg:mr-5">
+          <input
+            onChange={handleReating}
+            type="number"
+            placeholder="Rating"
+            min={1}
+            max={5}
+            className="input input-bordered input-secondary w-20"
+            id="rating"
+          />
+        </div>
+        <div className="">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex justify-evenly items-center "
+            className="flex justify-end items-center w-full"
           >
             <input
               type="number"
               placeholder="Min"
-              className="input input-bordered input-secondary w-20 "
+              className="input input-bordered input-secondary w-20 mr-2"
               id="min"
               {...register("min")}
             />
@@ -67,7 +96,8 @@ const AllProducts = () => {
             </button>
           </form>
         </div>
-        <label className="input input-secondary flex items-center gap-2 ml-5">
+
+        <label className="input input-secondary lg:w-[180px] flex items-center gap-2 lg:mx-5 my-2 lg:my-0">
           <input
             onChange={handleCategory}
             type="text"
@@ -89,7 +119,7 @@ const AllProducts = () => {
         </label>
 
         <select
-          className="select select-secondary ml-5 "
+          className="select select-secondary lg:w-[180px]"
           onChange={handleCategory}
           value={selectedCategory}
         >
@@ -104,6 +134,14 @@ const AllProducts = () => {
           <option value="Gloves">Gloves</option>
           <option value="Bat">Bat</option>
         </select>
+
+        <button
+          onClick={handleShowAll}
+          type="button"
+          className="btn btn-outline btn-secondary lg:ml-5 mt-2 lg:mt-0 "
+        >
+          Show All
+        </button>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-y-12 md:gap-x-20 p-5 md:p-10 lg:p-20 lg:pt-5">

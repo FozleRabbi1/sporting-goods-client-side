@@ -18,7 +18,7 @@ import { baseApi } from "../api/baseApi";
 export const RouterProduct = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllRouterProducts: builder.query({
-      query: ({ selectedCategory, minPrice, maxPrice }) => {
+      query: ({ selectedCategory, minPrice, maxPrice, reating }) => {
         console.log(selectedCategory, minPrice, maxPrice);
         return {
           url: `/products/all-products`,
@@ -27,6 +27,7 @@ export const RouterProduct = baseApi.injectEndpoints({
             searchTerm: selectedCategory,
             minPrice: minPrice,
             maxPrice: maxPrice,
+            reating,
           },
         };
       },
