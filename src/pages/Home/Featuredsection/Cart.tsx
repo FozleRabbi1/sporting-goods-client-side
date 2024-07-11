@@ -28,7 +28,7 @@ const Cart = (data: any) => {
         <div className="card-content p-2">
           <h2 className="card-title">{name}</h2>
           <p className="card-description text-[14px] opacity-90">
-            {description}
+            {description.slice(0, 45)} ...
           </p>
           <Rating
             readonly

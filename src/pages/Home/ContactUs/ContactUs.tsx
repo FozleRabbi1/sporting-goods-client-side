@@ -20,9 +20,9 @@ const ContactUs = () => {
           />
           <button
             type="submit"
-            className="p-3 bg-black text-white rounded-md w-full md:w-auto"
+            className="py-3 px-10 bg-black text-white rounded-md w-full md:w-auto"
           >
-            Subscribe
+            Send
           </button>
         </form>
 
