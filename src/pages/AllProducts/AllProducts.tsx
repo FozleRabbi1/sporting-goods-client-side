@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 const AllProducts = () => {
   const { handleSubmit, register, reset } = useForm();
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [reating, setReating] = useState(null);
+  const [rating, setReating] = useState(null);
   const [price, setPrice] = useState({});
 
   let newData;
@@ -16,7 +16,7 @@ const AllProducts = () => {
       selectedCategory,
       minPrice: price.min,
       maxPrice: price.max,
-      reating,
+      rating,
     });
   newData = data?.data;
 
