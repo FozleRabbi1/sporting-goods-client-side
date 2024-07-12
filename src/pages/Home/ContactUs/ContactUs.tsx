@@ -3,8 +3,8 @@ import React from "react";
 const ContactUs = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6 w-full">
-      <div className="bg-white p-8 rounded-lg shadow-lg  w-[100%] text-center flex flex-col justify-center items-center">
-        <h1 className="text-3xl md:text-3xl font-bold mb-4 opacity-90">
+      <div className="bg-white p-3 md:p-8 rounded-lg shadow-lg  w-[100%] text-center flex flex-col justify-center items-center">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 opacity-90">
           your personal SALES guide...
         </h1>
 

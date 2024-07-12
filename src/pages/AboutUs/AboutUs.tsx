@@ -1,4 +1,4 @@
-import React from "react";
+import { teamSectionInfo } from "./About.const";
 
 const AboutUs = () => {
   return (
@@ -70,12 +70,13 @@ const AboutUs = () => {
         </div>
       </div>
 
+      {/* contact-information */}
       <div className="contact-information py-10">
         <h2 className="text-4xl font-bold text-center my-10">
           {" "}
           Contact information{" "}
         </h2>
-        <div className="w-[80%] h-[75vh] mx-auto relative">
+        <div className="lg:w-[80%] h-[95vh] lg:h-[75vh]  mx-auto relative">
           <img
             className="w-full h-full"
             src="https://img.freepik.com/premium-photo/bat-ball-cricket_431161-44593.jpg?size=626&ext=jpg&ga=GA1.1.1395991368.1711843200&semt=ais"
@@ -83,7 +84,10 @@ const AboutUs = () => {
           />
           <div className="absolute top-0 left-0 bg-black opacity-70 w-full h-full"></div>
           <div className="absolute top-0 left-0 text-white flex justify-center items-center  w-full h-full">
-            <form className="flex flex-col gap-5 w-1/3  " action="">
+            <form
+              className="flex flex-col gap-5 w-full md:w-1/2 lg:w-1/3 px-5 md:px-0  "
+              action=""
+            >
               <h2 className="border-t rounded-full pt-1 px-3 text-center ">
                 Get in touch
               </h2>
@@ -108,6 +112,41 @@ const AboutUs = () => {
               </button>
             </form>
           </div>
+        </div>
+      </div>
+
+      {/* Team Section */}
+      <div className="lg:w-[80%] mx-auto">
+        <h2 className="text-4xl font-bold text-center my-10">Our Team</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {teamSectionInfo.map((item) => (
+            <div className="shadow-md">
+              <img className="w-full h-[220px]" src={item.imgUrl} alt="" />
+              <h2 className="text-center font-semibold p-2">
+                Name : {item.name}
+              </h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Our Store Location */}
+      <div>
+        <h2 className="text-4xl font-bold text-center mt-10 md:my-10">
+          Our Store Location
+        </h2>
+        <div className="grid grid-cols-3">
+          <div className="flex flex-col col-span-3 lg:col-span-1 mb-5 lg:mb-0  justify-center items-center">
+            <h2 className="text-xl font-serif underline">John Doe</h2>
+            <p>123 Cricket Lane</p>
+            <p>Birmingham, West Midlands, B23 6NR</p>
+            <p>United Kingdom</p>
+          </div>
+          <img
+            className=" col-span-3 lg:col-span-2 "
+            src="https://i.ibb.co/nMcKBbQ/location.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
