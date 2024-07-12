@@ -33,7 +33,7 @@ const CartPage = () => {
                   <h2 className="font-semibold text-red-500">
                     {item.price} $/=
                   </h2>
-                  <h2>persist : {item.addedProduct}</h2>
+                  <h2>Order : {item.addedProduct}</h2>
                 </span>
 
                 <span className="flex flex-col ml-auto">
@@ -60,8 +60,23 @@ const CartPage = () => {
             </div>
           ))}
         </div>
-        <div className="calculation">
-          <h2>calculation</h2>
+
+        <div className="calculation col-span-2 border px-10 h-[350px] flex flex-col">
+          <h2 className="text-center my-4 text-2xl font-bold">Order summary</h2>
+          <div className="flex flex-col flex-grow">
+            <span className="flex justify-between mb-2 border-b">
+              <p>Total Product</p> <p> 100 </p>
+            </span>
+            <span className="flex justify-between mb-2 border-b">
+              <p>Amount</p> <p> 5423 </p>
+            </span>
+            <span className="flex justify-between mb-2 border-b">
+              <p>Discount</p> <p> 15% </p>
+            </span>
+            <span className="flex justify-between mb-2 border-b mt-auto">
+              <p>Total Amount</p> <p> 4522 </p>
+            </span>
+          </div>
         </div>
       </div>
     </div>
