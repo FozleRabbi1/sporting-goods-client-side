@@ -1,22 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 
 const CartPage = () => {
   const { data } = getAddToCartProduct.useGetAddToCartProductQuery();
-  const {
-    name,
-    category,
-    brand,
-    rating,
-    description,
-    price,
-    image,
-    stockQuantity,
-  } = data?.data;
+
   return (
     <div className="py-10">
       <div className="grid grid-cols-6 gap-8">
         <div className="col-span-4 ">
-          {data?.data.map((item) => (
+          {data?.data.map((item: any) => (
             <div className="flex items-center justify-between gap-5 mb-5 px-2 py-1 border rounded relative ">
               <div className="flex items-center gap-4 w-[50%]">
                 <img

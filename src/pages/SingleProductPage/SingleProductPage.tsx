@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-unsafe-optional-chaining */
 import Rating from "react-rating";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
@@ -28,7 +30,7 @@ const SingleProductPage = () => {
 
   const stock = addToCardData?.data?.stockQuantity;
 
-  const handleAddtoCart = (data) => {
+  const handleAddtoCart = (data: any) => {
     const { _id, ...rest } = data;
     const newData = {
       mainId: _id,

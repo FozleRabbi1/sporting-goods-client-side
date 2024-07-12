@@ -7,6 +7,7 @@ export const getAddToCartProduct = baseApi.injectEndpoints({
         url: "/cart",
         method: "GET",
       }),
+      providesTags: ["CartProducts"],
     }),
   }),
 });
