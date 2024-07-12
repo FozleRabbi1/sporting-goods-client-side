@@ -3,7 +3,7 @@ import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../../redux/fetures/getSingleProducts";
-import { addToCart } from "../../redux/fetures/addToCard";
+import { addToCart } from "../../redux/fetures/Cart/addToCard";
 import { toast } from "sonner";
 
 const SingleProductPage = () => {
