@@ -6,6 +6,8 @@ import AllProducts from "../pages/AllProducts/AllProducts";
 import ManageProducts from "../pages/ManageProducts/ManageProducts";
 import NotFound from "../pages/NotFound/NotFound";
 import Categories from "../pages/Categories/Categories";
+import SingleProductPage from "../pages/SingleProductPage/SingleProductPage";
+import CartPage from "../pages/CartPage/CartPage";
 
 const routes = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const routes = createBrowserRouter([
       {
         path: "manage-product",
         element: <ManageProducts />,
+      },
+      {
+        path: "single-product/:id",
+        element: <SingleProductPage />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
       },
     ],
   },

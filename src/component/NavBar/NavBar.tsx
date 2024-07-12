@@ -91,6 +91,12 @@ const NavBar = () => {
           </NavLink>
           <NavLink
             className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="cart"
+          >
+            Cart
+          </NavLink>
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
             to="manage-product"
           >
             Manage-product

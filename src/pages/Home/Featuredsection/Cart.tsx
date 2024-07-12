@@ -3,9 +3,11 @@ import Rating from "react-rating";
 import "./Card.css";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Cart = (data: any) => {
   const {
+    _id,
     name,
     category,
     stockQuantity,
@@ -51,9 +53,12 @@ const Cart = (data: any) => {
           </div>
         </div>
         <div className="bg-slate-400 py-1 ">
-          <button className="w-full text-center text-xl font-semibold">
+          <NavLink
+            to={`/single-product/${_id}`}
+            className="w-full block text-center text-xl font-semibold  "
+          >
             View Details
-          </button>
+          </NavLink>
         </div>
       </div>
     </div>
