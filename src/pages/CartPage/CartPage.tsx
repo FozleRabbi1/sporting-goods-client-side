@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
+import { toast } from "sonner";
+import { deleteCartFun } from "../../redux/fetures/Cart/deleteCard";
 
 const CartPage = () => {
   const [incrementDecrement, setIncrementDecrement] = useState({});
 
   const { data, isLoading, refetch } =
     getAddToCartProduct.useGetAddToCartProductQuery(incrementDecrement);
+  const [deleteCart] = deleteCartFun.useDeleteCartMutation();
 
   useEffect(() => {
     if (incrementDecrement.id) {
@@ -26,10 +29,19 @@ const CartPage = () => {
   const totalProduct = productCounder?.reduce((acc, curr) => acc + curr, 0);
 
   const increment = (id) => {
-    setIncrementDecrement({ id, decrement: "increment" });
+    setIncrementDecrement({ id, increment: "increment" });
   };
   const decrement = (id) => {
     setIncrementDecrement({ id, decrement: "decrement" });
+  };
+
+  const handleDelete = (id) => {
+    toast("If you want to delete? click the button", {
+      action: {
+        label: "Delete",
+        onClick: () => deleteCart(id),
+      },
+    });
   };
 
   return (
@@ -53,7 +65,14 @@ const CartPage = () => {
                   <h2 className="font-semibold text-red-500">
                     {item.price} $/=
                   </h2>
-                  <h2>Order : {item.addedProduct}</h2>
+                  <h2>
+                    Order :{" "}
+                    {isLoading ? (
+                      <span className="loading loading-spinner loading-xs"></span>
+                    ) : (
+                      item.addedProduct
+                    )}
+                  </h2>
                 </span>
 
                 <span className="flex flex-col ml-auto">
@@ -69,7 +88,11 @@ const CartPage = () => {
                     onClick={() => {
                       decrement(item._id);
                     }}
-                    className="font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 "
+                    className={`font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 ${
+                      item.addedProduct === 1 &&
+                      "bg-red-200 hover:bg-red-200 hover:text-red-500"
+                    } `}
+                    disabled={item.addedProduct === 1 && true}
                   >
                     -
                   </button>
@@ -87,7 +110,10 @@ const CartPage = () => {
                   </h2>
                 </span>
               </div>
-              <button className="absolute -right-2 -top-3 bg-slate-600 size-6 rounded-full text-white text-lg flex justify-center items-center hover:text-red-500 hover:bg-red-100 duration-300">
+              <button
+                onClick={() => handleDelete(item._id)}
+                className="absolute -right-2 -top-3 bg-slate-600 size-6 rounded-full text-white text-lg flex justify-center items-center hover:text-red-500 hover:bg-red-100 duration-300"
+              >
                 X
               </button>
             </div>

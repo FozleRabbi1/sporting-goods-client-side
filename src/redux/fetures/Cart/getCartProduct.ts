@@ -5,7 +5,6 @@ export const getAddToCartProduct = baseApi.injectEndpoints({
     getAddToCartProduct: builder.query({
       query: (incrementDecrement) => {
         const queryString = JSON.stringify(incrementDecrement);
-        console.log(queryString);
         return {
           url: "/cart",
           method: "GET",
