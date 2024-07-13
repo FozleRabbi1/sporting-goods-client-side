@@ -4,13 +4,11 @@ export const getAddToCartProduct = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAddToCartProduct: builder.query({
       query: (incrementDecrement) => {
-        const queryString = JSON.stringify(incrementDecrement);
+        const params = { incrementDecrement: incrementDecrement.join(",") };
         return {
           url: "/cart",
           method: "GET",
-          params: {
-            incrementDecrement: queryString,
-          },
+          params,
         };
       },
       providesTags: ["CartProducts"],
