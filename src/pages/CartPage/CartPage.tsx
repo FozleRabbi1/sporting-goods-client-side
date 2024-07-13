@@ -1,8 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 
 const CartPage = () => {
-  const { data } = getAddToCartProduct.useGetAddToCartProductQuery();
+  const [incrementDecrement, setIncrementDecrement] = useState({});
+
+  const { data, isLoading, refetch } =
+    getAddToCartProduct.useGetAddToCartProductQuery(incrementDecrement);
+
+  useEffect(() => {
+    if (incrementDecrement.id) {
+      refetch();
+    }
+  }, [incrementDecrement, refetch]);
+
+  const counterData = data?.data.map((item) => {
+    const count = item.price * item.addedProduct;
+    return count;
+  });
+  const totalAmount = counterData?.reduce((acc, curr) => acc + curr, 0);
+  const discountPercentage = 15;
+  const discountAmount = (totalAmount * discountPercentage) / 100;
+  const finalAmount = totalAmount - discountAmount;
+  const productCounder = data?.data.map((item) => item.addedProduct);
+  const totalProduct = productCounder?.reduce((acc, curr) => acc + curr, 0);
+
+  const increment = (id) => {
+    setIncrementDecrement({ id, decrement: "increment" });
+  };
+  const decrement = (id) => {
+    setIncrementDecrement({ id, decrement: "decrement" });
+  };
 
   return (
     <div className="py-10">
@@ -29,10 +57,20 @@ const CartPage = () => {
                 </span>
 
                 <span className="flex flex-col ml-auto">
-                  <button className="font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 mb-2">
+                  <button
+                    onClick={() => {
+                      increment(item._id);
+                    }}
+                    className="font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 mb-2"
+                  >
                     +
                   </button>
-                  <button className="font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 ">
+                  <button
+                    onClick={() => {
+                      decrement(item._id);
+                    }}
+                    className="font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 "
+                  >
                     -
                   </button>
                 </span>
@@ -42,7 +80,10 @@ const CartPage = () => {
                 <span className=" flex items-center">
                   <h2 className="font-bold">Total : </h2>{" "}
                   <h2 className="font-semibold text-red-500 ml-1">
-                    {item.price * item.addedProduct} $
+                    {parseFloat(
+                      (item.price * item.addedProduct).toString()
+                    ).toFixed(2)}
+                    $
                   </h2>
                 </span>
               </div>
@@ -57,16 +98,40 @@ const CartPage = () => {
           <h2 className="text-center my-4 text-2xl font-bold">Order summary</h2>
           <div className="flex flex-col flex-grow">
             <span className="flex justify-between mb-2 border-b">
-              <p>Total Product</p> <p> 100 </p>
+              <p>Total Product</p>{" "}
+              <p>
+                {" "}
+                {isLoading ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  totalProduct
+                )}{" "}
+              </p>
             </span>
             <span className="flex justify-between mb-2 border-b">
-              <p>Amount</p> <p> 5423 </p>
+              <p>Amount</p>{" "}
+              <p>
+                {" "}
+                {isLoading ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  parseFloat(totalAmount).toFixed(2)
+                )}{" "}
+              </p>
             </span>
             <span className="flex justify-between mb-2 border-b">
               <p>Discount</p> <p> 15% </p>
             </span>
             <span className="flex justify-between mb-2 border-b mt-auto">
-              <p>Total Amount</p> <p> 4522 </p>
+              <p>Total Amount</p>{" "}
+              <p>
+                {" "}
+                {isLoading ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  parseFloat(finalAmount.toString()).toFixed(2)
+                )}
+              </p>
             </span>
           </div>
         </div>

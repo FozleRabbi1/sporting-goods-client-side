@@ -19,10 +19,10 @@ const Cart = (data: any) => {
   } = data.item;
   return (
     <div data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
-      <div className="card border overflow-hidden group" key={data._id}>
+      <div className=" border  group" key={data._id}>
         <div className="h-[300px] w-[100%] overflow-hidden">
           <img
-            className="h-[100%] w-[100%] mx-auto rounded-t-md transform transition-transform duration-500 group-hover:scale-110"
+            className="h-[100%] w-[100%] mx-auto  transform transition-transform duration-500 group-hover:scale-110"
             src={image}
             alt=""
           />
