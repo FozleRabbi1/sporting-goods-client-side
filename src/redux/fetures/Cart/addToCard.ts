@@ -8,8 +8,7 @@ export const addToCart = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["CartProducts"], 
+      invalidatesTags: ["CartProducts"],
     }),
   }),
 });
-

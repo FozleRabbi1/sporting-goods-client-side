@@ -31,7 +31,7 @@ const Featuredsection = () => {
           </NavLink>
         ))}
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-y-12 md:gap-x-20 p-5 md:p-10 lg:p-20 lg:pt-0 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-10 md:gap-y-12 md:gap-x-5 lg:gap-10 xl:gap-20 p-5 md:p-10 lg:p-0 xl:p-20 lg:pt-5">
         {data?.data?.map((item) => (
           <Cart key={item._id} item={item}></Cart>
         ))}

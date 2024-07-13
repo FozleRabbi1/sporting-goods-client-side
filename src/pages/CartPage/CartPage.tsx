@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 import { toast } from "sonner";
