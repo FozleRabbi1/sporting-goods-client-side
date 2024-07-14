@@ -42,8 +42,8 @@ const CartPage = () => {
           label: "Delete",
           onClick: async () => {
             await deleteCart(id).unwrap();
-            setIncrementDecrement([]); // Reset incrementDecrement state
-            refetch(); // Refetch data if necessary
+            setIncrementDecrement([]);
+            refetch();
           },
         },
       });
@@ -51,16 +51,6 @@ const CartPage = () => {
       console.error("Failed to delete the item:", error);
     }
   };
-
-  // const handleDelete = async (id) => {
-  //   try {
-  //     await deleteCart(id).unwrap();
-  //     setIncrementDecrement([]); // Reset incrementDecrement state
-  //     refetch(); // Refetch data if necessary
-  //   } catch (error) {
-  //     console.error("Failed to delete the item:", error);
-  //   }
-  // };
 
   return (
     <div className="py-10">
@@ -126,10 +116,9 @@ const CartPage = () => {
                           decrement(item._id);
                         }}
                         className={`font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 ${
-                          item.addedProduct === 1 && ""
-                          // "bg-red-200 hover:bg-red-200 hover:text-red-500"
+                          item.addedProduct <= 1 &&
+                          "bg-red-300 hover:bg-red-300"
                         } `}
-                        // disabled={item.addedProduct === 1 && true}
                       >
                         -
                       </button>
@@ -200,7 +189,7 @@ const CartPage = () => {
                 </p>
               </span>
             </div>
-            {isTrue ? (
+            {(data?.data.length === 0) | isTrue ? (
               <button className="border block text-center bg-red-500 p-1 my-1 rounded font-semibold text-white text-xl">
                 Proceed to checkout
               </button>

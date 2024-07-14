@@ -20,6 +20,10 @@ const AllProducts = () => {
     });
   newData = data?.data;
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   if (isLoading) {
     return <p>Loading ...</p>;
   }
