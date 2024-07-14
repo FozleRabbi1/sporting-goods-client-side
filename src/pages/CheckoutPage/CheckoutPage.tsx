@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { checkOutProducts } from "../../redux/fetures/Cart/checkOut";
 
 const CheckoutPage = () => {
   const navlink = useNavigate();
-  const { data, isLoading, refetch } =
-    getAddToCartProduct.useGetAddToCartProductQuery([]);
+  const { data, refetch } = getAddToCartProduct.useGetAddToCartProductQuery([]);
+  const [checkOut] = checkOutProducts.useCheckOutMutation();
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const filterData = data?.data.map((item) => ({
+    cartId: item._id,
+    mainId: item?.mainId,
+    addedProduct: item?.addedProduct,
+  }));
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,9 +35,11 @@ const CheckoutPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    checkOut(filterData);
+    refetch();
     navlink("/thankYou");
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg  text-white">
@@ -41,7 +55,7 @@ const CheckoutPage = () => {
             value={formData.name}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            required
+            // required
           />
           <input
             type="email"
@@ -50,7 +64,7 @@ const CheckoutPage = () => {
             value={formData.email}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            required
+            // required
           />
           <input
             type="tel"
@@ -59,7 +73,7 @@ const CheckoutPage = () => {
             value={formData.phone}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            required
+            // required
           />
           <textarea
             name="address"
@@ -67,7 +81,7 @@ const CheckoutPage = () => {
             value={formData.address}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            required
+            // required
           ></textarea>
 
           <button

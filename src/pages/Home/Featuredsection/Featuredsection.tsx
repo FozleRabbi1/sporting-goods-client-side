@@ -1,9 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { allProducts } from "../../../redux/fetures/getAllProducts";
 import Cart from "./Cart";
+import { useEffect } from "react";
 
 const Featuredsection = () => {
-  const { data, isLoading } = allProducts.useGetAllProductsQuery(undefined);
+  const { data, isLoading, refetch } =
+    allProducts.useGetAllProductsQuery(undefined);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return <p>Loading ...</p>;
