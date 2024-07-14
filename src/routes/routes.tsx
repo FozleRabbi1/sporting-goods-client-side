@@ -8,6 +8,8 @@ import NotFound from "../pages/NotFound/NotFound";
 import Categories from "../pages/Categories/Categories";
 import SingleProductPage from "../pages/SingleProductPage/SingleProductPage";
 import CartPage from "../pages/CartPage/CartPage";
+import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
+import ThankYouPage from "../pages/ThankYouPage";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const routes = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "checkout-page",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "thankYou",
+        element: <ThankYouPage />,
       },
     ],
   },

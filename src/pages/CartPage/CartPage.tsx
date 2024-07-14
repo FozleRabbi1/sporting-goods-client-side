@@ -3,12 +3,13 @@ import { useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 import { toast } from "sonner";
 import { deleteCartFun } from "../../redux/fetures/Cart/deleteCard";
+import { NavLink } from "react-router-dom";
 
 const CartPage = () => {
+  // const [isTrue, setIsTrue] = useState(false);
   const [incrementDecrement, setIncrementDecrement] = useState([]);
   const { data, isLoading, refetch } =
     getAddToCartProduct.useGetAddToCartProductQuery(incrementDecrement);
-
   const [deleteCart] = deleteCartFun.useDeleteCartMutation();
 
   const counterData = data?.data.map((item) => {
@@ -21,6 +22,8 @@ const CartPage = () => {
   const finalAmount = totalAmount - discountAmount;
   const productCounder = data?.data.map((item) => item.addedProduct);
   const totalProduct = productCounder?.reduce((acc, curr) => acc + curr, 0);
+  const isProductZero = data?.data.map((item) => item.addedProduct <= 0);
+  const isTrue = isProductZero?.includes(true);
 
   const increment = (id) => {
     setIncrementDecrement([id, "increment"]);
@@ -123,10 +126,10 @@ const CartPage = () => {
                           decrement(item._id);
                         }}
                         className={`font-bold bg-gray-100 size-8 text-2xl rounded-lg flex items-start justify-center hover:text-green-500 hover:bg-green-100 duration-300 ${
-                          item.addedProduct === 1 &&
-                          "bg-red-200 hover:bg-red-200 hover:text-red-500"
+                          item.addedProduct === 1 && ""
+                          // "bg-red-200 hover:bg-red-200 hover:text-red-500"
                         } `}
-                        disabled={item.addedProduct === 1 && true}
+                        // disabled={item.addedProduct === 1 && true}
                       >
                         -
                       </button>
@@ -155,7 +158,7 @@ const CartPage = () => {
               ))
             )}
           </div>
-          <div className="calculation col-span-6  lg:col-span-2 border px-10 h-[250px] flex flex-col">
+          <div className="calculation col-span-6  lg:col-span-2 border px-10 h-[300px] flex flex-col">
             <h2 className="text-center my-4 text-2xl font-bold">
               Order summary
             </h2>
@@ -197,6 +200,18 @@ const CartPage = () => {
                 </p>
               </span>
             </div>
+            {isTrue ? (
+              <button className="border block text-center bg-red-500 p-1 my-1 rounded font-semibold text-white text-xl">
+                Proceed to checkout
+              </button>
+            ) : (
+              <NavLink
+                to="/checkout-page"
+                className={`border block text-center bg-green-400 p-1 my-1 rounded font-semibold text-white text-xl duration-300 `}
+              >
+                Proceed to checkout
+              </NavLink>
+            )}
           </div>
         </div>
       )}
