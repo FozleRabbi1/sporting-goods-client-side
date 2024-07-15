@@ -52,13 +52,21 @@ const Cart = (data: any) => {
             </span>
           </div>
         </div>
-        <div className="bg-slate-400 py-1 ">
-          <NavLink
-            to={`/single-product/${_id}`}
-            className="w-full block text-center text-xl font-semibold  "
-          >
-            View Details
-          </NavLink>
+
+        <div className="bg-slate-400 ">
+          {stockQuantity <= 0 ? (
+            <button className="w-full block text-center text-xl font-semibold bg-red-300  cursor-not-allowed py-1 ">
+              {" "}
+              Stock Out{" "}
+            </button>
+          ) : (
+            <NavLink
+              to={`/single-product/${_id}`}
+              className="w-full block text-center text-xl font-semibold  py-1"
+            >
+              View Details
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

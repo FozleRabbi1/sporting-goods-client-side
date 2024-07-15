@@ -111,6 +111,7 @@ const CartPage = () => {
                       >
                         +
                       </button>
+
                       <button
                         onClick={() => {
                           decrement(item._id);

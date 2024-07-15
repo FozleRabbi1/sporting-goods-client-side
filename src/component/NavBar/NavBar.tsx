@@ -45,10 +45,10 @@ const NavBar = () => {
                 <NavLink to="all-products">All-Products</NavLink>
               </li>
               <li>
-                <NavLink to="about-us">About-Us</NavLink>
+                <NavLink to="manage-product">Manage-product</NavLink>
               </li>
               <li>
-                <NavLink to="manage-product">Manage-product</NavLink>
+                <NavLink to="about-us">About-Us</NavLink>
               </li>
             </ul>
           </div>
@@ -59,10 +59,8 @@ const NavBar = () => {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWnoyJnn5aANyBkN0d7ErHjkBwBGSv6MbZA&s"
               alt=""
             />{" "}
-            {/* <h2>Sports Store</h2> */}
             <TextTransition
               className="text-2xl font-bold ml-4  "
-              // springConfig={presets.wobbly}
               springConfig={{ tension: 160, friction: 30 }}
             >
               {TEXTS[index % TEXTS.length]}
@@ -83,12 +81,7 @@ const NavBar = () => {
           >
             All-Products
           </NavLink>
-          <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
-            to="about-us"
-          >
-            About-Us
-          </NavLink>
+
           <NavLink
             className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
             to="cart"
@@ -100,6 +93,12 @@ const NavBar = () => {
             to="manage-product"
           >
             Manage-product
+          </NavLink>
+          <NavLink
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            to="about-us"
+          >
+            About-Us
           </NavLink>
         </div>
       </div>
