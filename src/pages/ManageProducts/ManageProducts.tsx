@@ -150,12 +150,18 @@ import { allProducts } from "../../redux/fetures/getAllProducts";
 import ManageSIngleCart from "./ManageSIngleCart";
 import { createProductApi } from "../../redux/fetures/createProduct";
 import { useState, useRef } from "react";
+import { toast } from "sonner";
 
 const ManageProducts = () => {
   const { data, isLoading, refetch } =
     allProducts.useGetAllProductsQuery(undefined);
-  const [createProduct] = createProductApi.useCreateProductMutation();
+  const [createProduct, { isSuccess }] =
+    createProductApi.useCreateProductMutation();
   const getData = data?.data;
+
+  if (isSuccess) {
+    toast.success("Product Create SUccessfully");
+  }
 
   const [formData, setFormData] = useState({
     name: "",

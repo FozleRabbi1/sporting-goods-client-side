@@ -14,7 +14,7 @@ const MainLayout = () => {
         <NavBar></NavBar>
         <Outlet></Outlet>
       </div>
-      <div className="bg-green-100 px-5">
+      <div className=" px-5">
         <Footer></Footer>
       </div>
     </div>

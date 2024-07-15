@@ -7,6 +7,7 @@ export const allProducts = baseApi.injectEndpoints({
         url: "/products",
         method: "GET",
       }),
+      pollingInterval: 30000,
     }),
   }),
 });

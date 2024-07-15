@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 // import TextTransition, { presets } from "react-text-transition";
 import TextTransition from "react-text-transition";
 import "./NavBar.css";
+import { FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import { MdManageHistory, MdOutlineRoundaboutRight } from "react-icons/md";
 
 const TEXTS = ["Sports Store.", "Sports Store..", "Sports Store..."];
 
@@ -70,35 +72,35 @@ const NavBar = () => {
 
         <div className="navbar-end hidden  lg:flex w-full">
           <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg  flex items-center justify-around"
             to="/"
           >
-            Home
+            <FaHome className="mr-1" /> Home
           </NavLink>
           <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg flex items-center justify-around"
             to="all-products"
           >
-            All-Products
+            <FaWallet className="mr-1" /> All-Products
           </NavLink>
 
           <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg flex items-center justify-around"
             to="cart"
           >
-            Cart
+            <FaShoppingCart className="mr-1" /> Cart
           </NavLink>
           <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg flex items-center justify-around "
             to="manage-product"
           >
-            Manage-product
+            <MdManageHistory className="mr-1" /> Manage-product
           </NavLink>
           <NavLink
-            className="ml-10 nav-button px-3 py-1 font-semibold text-lg "
+            className="ml-10 nav-button px-3 py-1 font-semibold text-lg flex items-center justify-around"
             to="about-us"
           >
-            About-Us
+            <MdOutlineRoundaboutRight className="mr-1" /> About-Us
           </NavLink>
         </div>
       </div>

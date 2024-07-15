@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 const AllProducts = () => {
   const { handleSubmit, register, reset } = useForm();
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [rating, setReating] = useState(null);
+  const [sorting, setSorting] = useState("descending");
   const [price, setPrice] = useState({});
 
   let newData;
@@ -16,12 +16,10 @@ const AllProducts = () => {
       selectedCategory,
       minPrice: price.min,
       maxPrice: price.max,
-      rating,
+      sorting,
     });
   newData = data?.data;
 
-  console.log(newData);
-  
   useEffect(() => {
     refetch();
   }, []);
@@ -32,17 +30,28 @@ const AllProducts = () => {
 
   const handleCategory = (event) => {
     setPrice({});
+    setSorting("");
     setSelectedCategory(event.target.value);
     reset();
   };
 
-  const handleReating = (event) => {
+  const handleAss = (event) => {
     setPrice({});
-    setReating(event.target.value);
-    reset();
+    setSorting("");
+    setSorting(event);
+    refetch();
   };
+
+  const handleAssDiss = (event) => {
+    setPrice({});
+    setSorting("");
+    setSorting(event);
+    refetch();
+  };
+
   const onSubmit = (data) => {
     setSelectedCategory("");
+    setSorting("");
     setPrice(data);
     reset();
   };
@@ -50,6 +59,7 @@ const AllProducts = () => {
   const handleShowAll = () => {
     setSelectedCategory("");
     setPrice({});
+    setSorting("");
     refetch();
   };
 
@@ -57,15 +67,21 @@ const AllProducts = () => {
     <div>
       <div className="flex flex-col lg:flex-row justify-between md:justify-end pt-5 px-5 lg:px-20 ">
         <div className="flex justify-end mb-2 lg:mb-0 lg:mr-5">
-          <input
-            onChange={handleReating}
-            type="number"
-            placeholder="Rating"
-            min={1}
-            max={5}
-            className="input input-bordered input-secondary w-20"
-            id="rating"
-          />
+          {sorting === "ascending" ? (
+            <button
+              onClick={() => handleAssDiss("descending")}
+              className="input input-bordered input-secondary"
+            >
+              Descending{" "}
+            </button>
+          ) : (
+            <button
+              onClick={() => handleAss("ascending")}
+              className="input input-bordered input-secondary"
+            >
+              Ascending{" "}
+            </button>
+          )}
         </div>
         <div className="">
           <form
