@@ -55,7 +55,7 @@ const CheckoutPage = () => {
             value={formData.name}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            // required
+            required
           />
           <input
             type="email"
@@ -64,7 +64,7 @@ const CheckoutPage = () => {
             value={formData.email}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            // required
+            required
           />
           <input
             type="tel"
@@ -73,7 +73,7 @@ const CheckoutPage = () => {
             value={formData.phone}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            // required
+            required
           />
           <textarea
             name="address"
@@ -81,7 +81,7 @@ const CheckoutPage = () => {
             value={formData.address}
             onChange={handleChange}
             className="w-full p-2 mb-4 rounded bg-gray-700"
-            // required
+            required
           ></textarea>
 
           <button

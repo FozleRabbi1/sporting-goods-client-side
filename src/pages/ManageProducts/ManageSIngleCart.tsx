@@ -1,7 +1,23 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { deleteProductApi } from "../../redux/fetures/deleteProduct";
+import { toast } from "sonner";
 
 const ManageSIngleCart = ({ data }) => {
+  const [deleteProduct] = deleteProductApi.useDeleteProductMutation();
+
+  const handleDelete = async (id) => {
+    toast("Are you sure you want to delete?", {
+      action: {
+        label: "Delete",
+        onClick: async () => {
+          await deleteProduct(id);
+          window.location.reload();
+        },
+      },
+    });
+  };
+
   return (
     <div className="bg-green-100 mb-4  rounded px-2 py-1">
       <div className="flex items-center justify-around gap-4 ">
@@ -40,7 +56,10 @@ const ManageSIngleCart = ({ data }) => {
             onClick={() => document.getElementById("my_modal_4").showModal()}
             className="cursor-pointer text-green-500 text-[8px] border size-7 md:size-8 rounded-lg hover:text-green-700 duration-500 sm:text-[26px] font-semibold p-0.5 "
           />
-          <MdDeleteForever className="cursor-pointer text-red-500 text-[8px] border size-7 md:size-8 rounded-lg hover:text-red-700 duration-500 sm:text-[26px] font-semibold p-0.5 md:ml-4" />
+          <MdDeleteForever
+            onClick={() => handleDelete(data._id)}
+            className="cursor-pointer text-red-500 text-[8px] border size-7 md:size-8 rounded-lg hover:text-red-700 duration-500 sm:text-[26px] font-semibold p-0.5 md:ml-4"
+          />
         </span>
       </div>
 

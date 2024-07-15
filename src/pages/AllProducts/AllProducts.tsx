@@ -20,6 +20,8 @@ const AllProducts = () => {
     });
   newData = data?.data;
 
+  console.log(newData);
+  
   useEffect(() => {
     refetch();
   }, []);
