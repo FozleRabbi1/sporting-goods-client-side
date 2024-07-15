@@ -1,5 +1,5 @@
 import { CiInstagram } from "react-icons/ci";
-import { FaFacebookSquare, FaWhatsappSquare } from "react-icons/fa";
+import { FaFacebookSquare, FaTelegram, FaWhatsappSquare } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
@@ -14,6 +14,7 @@ const Footer = () => {
           />
           <p>ACME Industries Ltd.</p>
         </aside>
+
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
@@ -21,7 +22,8 @@ const Footer = () => {
           <a className="link link-hover">Marketing</a>
           <a className="link link-hover">Advertisement</a>
         </nav>
-        <nav>
+
+        <nav className="">
           <h6 className="footer-title">Company</h6>
           <li>
             <NavLink to="/">Home</NavLink>
@@ -36,17 +38,24 @@ const Footer = () => {
             <NavLink to="about-us">About-Us</NavLink>
           </li>
         </nav>
-        <nav>
+
+        <nav className="w-full">
           <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">
-            <FaFacebookSquare className="text-2xl text-blue-600" />
-          </a>
-          <a className="link link-hover">
-            <CiInstagram className="text-2xl text-orange-600" />
-          </a>
-          <a className="link link-hover">
-            <FaWhatsappSquare className="text-2xl text-green-600" />
-          </a>
+          <div className="flex w-[50%] justify-between">
+            <a className="link link-hover">
+              <FaFacebookSquare className="text-2xl text-blue-600" />
+            </a>
+            <a className="link link-hover">
+              <CiInstagram className="text-2xl text-orange-600" />
+            </a>
+            <a className="link link-hover">
+              <FaWhatsappSquare className="text-2xl text-green-600" />
+            </a>
+
+            <a className="link link-hover">
+              <FaTelegram className="text-2xl text-green-600" />
+            </a>
+          </div>
         </nav>
       </footer>
     </div>
