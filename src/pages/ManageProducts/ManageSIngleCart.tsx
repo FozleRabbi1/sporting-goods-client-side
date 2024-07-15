@@ -2,9 +2,13 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteProductApi } from "../../redux/fetures/deleteProduct";
 import { toast } from "sonner";
+import { useRef, useState } from "react";
+import { updateProductApi } from "../../redux/fetures/updateProduct";
 
 const ManageSIngleCart = ({ data }) => {
   const [deleteProduct] = deleteProductApi.useDeleteProductMutation();
+  const [getId, setGetId] = useState("");
+  const [updateProduct] = updateProductApi.useUpdateProductMutation();
 
   const handleDelete = async (id) => {
     toast("Are you sure you want to delete?", {
@@ -16,6 +20,69 @@ const ManageSIngleCart = ({ data }) => {
         },
       },
     });
+  };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    stock: "",
+    brand: "",
+    rating: "",
+    price: "",
+    image: "",
+    description: "",
+  });
+
+  const modalRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { price, rating, stock, ...spred } = formData;
+    const updateNewData = {
+      id: getId,
+      price: parseInt(price),
+      rating: parseInt(rating),
+      stockQuantity: parseInt(stock),
+      ...spred,
+    };
+    const filterData = (updateNewData) => {
+      return Object.fromEntries(
+        Object.entries(updateNewData).filter(
+          ([key, value]) => value !== "" && !Number.isNaN(value)
+        )
+      );
+    };
+    const filteredData = filterData(updateNewData);
+    updateProduct(filteredData);
+    setFormData({
+      name: "",
+      category: "",
+      stock: "",
+      brand: "",
+      rating: "",
+      price: "",
+      image: "",
+      description: "",
+    });
+    window.location.reload();
+    modalRef.current.close();
+  };
+
+  const handleOpenModal = (id) => {
+    setGetId(id);
+    modalRef.current.showModal();
+  };
+
+  const handleCloseModal = () => {
+    modalRef.current.close();
   };
 
   return (
@@ -53,7 +120,7 @@ const ManageSIngleCart = ({ data }) => {
 
         <span className="flex flex-col md:flex-row items-center justify-center">
           <FaRegEdit
-            onClick={() => document.getElementById("my_modal_4").showModal()}
+            onClick={() => handleOpenModal(data._id)}
             className="cursor-pointer text-green-500 text-[8px] border size-7 md:size-8 rounded-lg hover:text-green-700 duration-500 sm:text-[26px] font-semibold p-0.5 "
           />
           <MdDeleteForever
@@ -63,11 +130,15 @@ const ManageSIngleCart = ({ data }) => {
         </span>
       </div>
 
-      <dialog id="my_modal_4" className="modal">
+      <dialog ref={modalRef} id="my_modal_3" className="modal">
         <div className="modal-box">
-          <h2 className="text-center font-semibold">Update Your Product</h2>
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <h2 className="text-center font-semibold">Add Your Product</h2>
+          <form onSubmit={handleSubmit}>
+            <button
+              type="button"
+              onClick={handleCloseModal}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
               ✕
             </button>
 
@@ -76,11 +147,17 @@ const ManageSIngleCart = ({ data }) => {
                 placeholder="name"
                 className="border p-1 w-full my-2 rounded px-2"
                 type="text"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
               />
               <input
                 placeholder="category"
                 className="border p-1 w-full my-2 rounded px-2"
                 type="text"
+                id="category"
+                value={formData.category}
+                onChange={handleChange}
               />
             </span>
 
@@ -88,12 +165,18 @@ const ManageSIngleCart = ({ data }) => {
               <input
                 placeholder="stock"
                 className="border p-1 w-full my-2 rounded px-2"
-                type="text"
+                type="number"
+                id="stock"
+                value={formData.stock}
+                onChange={handleChange}
               />
               <input
                 placeholder="brand"
                 className="border p-1 w-full my-2 rounded px-2"
                 type="text"
+                id="brand"
+                value={formData.brand}
+                onChange={handleChange}
               />
             </span>
 
@@ -101,13 +184,18 @@ const ManageSIngleCart = ({ data }) => {
               <input
                 placeholder="rating"
                 className="border p-1 w-full my-2 rounded px-2"
-                type="text"
+                type="number"
+                id="rating"
+                value={formData.rating}
+                onChange={handleChange}
               />
-
               <input
                 placeholder="price"
                 className="border p-1 w-full my-2 rounded px-2"
-                type="text"
+                type="number"
+                id="price"
+                value={formData.price}
+                onChange={handleChange}
               />
             </span>
 
@@ -115,15 +203,22 @@ const ManageSIngleCart = ({ data }) => {
               placeholder="image Url"
               className="border p-1 w-full my-2 rounded px-2"
               type="text"
+              id="image"
+              value={formData.image}
+              onChange={handleChange}
             />
             <textarea
               placeholder="description"
               className="border p-1 w-full my-2 rounded px-2"
-              name=""
-              id=""
+              id="description"
+              value={formData.description}
+              onChange={handleChange}
             ></textarea>
 
-            <button className="border rounded-full w-[200px] py-2 mx-auto block">
+            <button
+              type="submit"
+              className="border rounded-full w-[200px] py-2 mx-auto block"
+            >
               Submit
             </button>
           </form>
