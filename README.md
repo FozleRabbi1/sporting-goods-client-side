@@ -33,7 +33,7 @@ The primary purpose of this cricket e-commerce platform is to provide a comprehe
 - User-Generated Listings: Enable users to upload their own products, fostering a community-driven
   marketplace.
 
-## 2 :
+## 2 : User-Friendly Experience:
 
 - Intuitive Navigation: Ensure a seamless browsing experience with well-organized categories and a
   user-friendly interface.
