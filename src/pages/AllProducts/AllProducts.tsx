@@ -1,15 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
 import { useEffect, useState } from "react";
 import Cart from "../Home/Featuredsection/Cart";
 import { RouterProduct } from "../../redux/fetures/get-AllProducts";
 import "react-range-slider-input/dist/style.css";
 import { useForm } from "react-hook-form";
 
+type PriceType = {
+  min: number;
+  max: number;
+};
+
 const AllProducts = () => {
   const { handleSubmit, register, reset } = useForm();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sorting, setSorting] = useState("descending");
-  const [price, setPrice] = useState({});
-
+  const [price, setPrice] = useState<PriceType>({ min: 0, max: 100 });
   let newData;
   const { data, isLoading, refetch } =
     RouterProduct.useGetAllRouterProductsQuery({
@@ -28,28 +34,28 @@ const AllProducts = () => {
     return <p>Loading ...</p>;
   }
 
-  const handleCategory = (event) => {
-    setPrice({});
+  const handleCategory = (event: any) => {
+    setPrice({ min: 0, max: 0 });
     setSorting("");
     setSelectedCategory(event.target.value);
     reset();
   };
 
-  const handleAss = (event) => {
-    setPrice({});
+  const handleAss = (event: any) => {
+    setPrice({ min: 0, max: 0 });
     setSorting("");
     setSorting(event);
     refetch();
   };
 
-  const handleAssDiss = (event) => {
-    setPrice({});
+  const handleAssDiss = (event: any) => {
+    setPrice({ min: 0, max: 0 });
     setSorting("");
     setSorting(event);
     refetch();
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     setSelectedCategory("");
     setSorting("");
     setPrice(data);
@@ -58,7 +64,7 @@ const AllProducts = () => {
 
   const handleShowAll = () => {
     setSelectedCategory("");
-    setPrice({});
+    setPrice({ min: 0, max: 0 });
     setSorting("");
     refetch();
   };
@@ -170,7 +176,7 @@ const AllProducts = () => {
         {newData?.length === 0 ? (
           <p> No data Found </p>
         ) : (
-          newData?.map((item) => <Cart key={item._id} item={item}></Cart>)
+          newData?.map((item: any) => <Cart key={item._id} item={item}></Cart>)
         )}
       </div>
     </div>

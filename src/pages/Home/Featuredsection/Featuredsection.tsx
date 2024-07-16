@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink } from "react-router-dom";
 import { allProducts } from "../../../redux/fetures/getAllProducts";
 import Cart from "./Cart";
@@ -15,7 +16,7 @@ const Featuredsection = () => {
     return <p>Loading ...</p>;
   }
   const uniqueCategories = [
-    ...new Set(data?.data.map((item) => item.category)),
+    ...new Set(data?.data.map((item: any) => item.category)),
   ];
   return (
     <div className="bg-[#edf5f5] ">
@@ -28,7 +29,7 @@ const Featuredsection = () => {
         Lectus ut, elementum a.
       </p>
       <div className="flex justify-center flex-wrap gap-4 py-4 pb-0 ld:py-8">
-        {uniqueCategories.map((item) => (
+        {uniqueCategories.map((item: any) => (
           <NavLink
             to={`/catories/${item}`}
             className=" text-center bg-slate-400 w-[120px] p-1 rounded mb-5 text-xl font-semibold"
@@ -38,7 +39,7 @@ const Featuredsection = () => {
         ))}
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-10 md:gap-y-12 md:gap-x-5 lg:gap-10 xl:gap-20 p-5 md:p-10 lg:p-0 xl:p-20 lg:pt-5">
-        {data?.data?.map((item) => (
+        {data?.data?.map((item: any) => (
           <Cart key={item._id} item={item}></Cart>
         ))}
       </div>

@@ -33,6 +33,7 @@ const Cart = (data: any) => {
             {description.slice(0, 45)} ...
           </p>
           <Rating
+            {...data.item}
             readonly
             placeholderRating={rating}
             emptySymbol={<CiStar />}

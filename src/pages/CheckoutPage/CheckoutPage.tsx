@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ const CheckoutPage = () => {
     refetch();
   }, []);
 
-  const filterData = data?.data.map((item) => ({
+  const filterData = data?.data.map((item: any) => ({
     cartId: item._id,
     mainId: item?.mainId,
     addedProduct: item?.addedProduct,
@@ -25,7 +26,7 @@ const CheckoutPage = () => {
     address: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -33,7 +34,7 @@ const CheckoutPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     checkOut(filterData);
     refetch();
