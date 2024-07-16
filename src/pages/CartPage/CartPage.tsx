@@ -7,42 +7,54 @@ import { NavLink } from "react-router-dom";
 
 const CartPage = () => {
   // const [isTrue, setIsTrue] = useState(false);
-  const [incrementDecrement, setIncrementDecrement] = useState([]);
+  const [incrementDecrement, setIncrementDecrement] = useState<
+    [string, string]
+  >(["", ""]);
   const { data, isLoading, refetch } =
     getAddToCartProduct.useGetAddToCartProductQuery(incrementDecrement);
   const [deleteCart] = deleteCartFun.useDeleteCartMutation();
 
-  const counterData = data?.data.map((item) => {
+  const counterData = data?.data.map((item: any) => {
     const count = item.price * item.addedProduct;
     return count;
   });
-  const totalAmount = counterData?.reduce((acc, curr) => acc + curr, 0);
+  const totalAmount = counterData?.reduce(
+    (acc: any, curr: any) => acc + curr,
+    0
+  );
   const discountPercentage = 15;
   const discountAmount = (totalAmount * discountPercentage) / 100;
   const finalAmount = totalAmount - discountAmount;
-  const productCounder = data?.data.map((item) => item.addedProduct);
-  const totalProduct = productCounder?.reduce((acc, curr) => acc + curr, 0);
-  const isProductZero = data?.data.map((item) => item.addedProduct <= 0);
+  const productCounder = data?.data.map(
+    (item: { addedProduct: any }) => item.addedProduct
+  );
+  const totalProduct = productCounder?.reduce(
+    (acc: any, curr: any) => acc + curr,
+    0
+  );
+  const isProductZero = data?.data.map(
+    (item: { addedProduct: number }) => item.addedProduct <= 0
+  );
   const isTrue = isProductZero?.includes(true);
 
-  const increment = (id) => {
+  const increment = (id: string) => {
     setIncrementDecrement([id, "increment"]);
     refetch();
   };
 
-  const decrement = (id) => {
+  const decrement = (id: string) => {
     setIncrementDecrement([id, "decrement"]);
     refetch();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     try {
       toast("Are you sure you want to delete?", {
         action: {
           label: "Delete",
           onClick: async () => {
             await deleteCart(id).unwrap();
-            setIncrementDecrement([]);
+            setIncrementDecrement(["", ""]);
             refetch();
           },
         },
@@ -190,7 +202,7 @@ const CartPage = () => {
                 </p>
               </span>
             </div>
-            {(data?.data.length === 0) | isTrue ? (
+            {data?.data.length === 0 || isTrue ? (
               <button className="border block text-center bg-red-500 p-1 my-1 rounded font-semibold text-white text-xl">
                 Proceed to checkout
               </button>

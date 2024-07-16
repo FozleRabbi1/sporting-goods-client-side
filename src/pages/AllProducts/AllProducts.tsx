@@ -15,7 +15,8 @@ const AllProducts = () => {
   const { handleSubmit, register, reset } = useForm();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sorting, setSorting] = useState("descending");
-  const [price, setPrice] = useState<PriceType>({ min: 0, max: 100 });
+  const [price, setPrice] = useState<PriceType>({ min: 0, max: 10000 });
+  // const [price, setPrice] = useState({});
   let newData;
   const { data, isLoading, refetch } =
     RouterProduct.useGetAllRouterProductsQuery({
@@ -35,21 +36,21 @@ const AllProducts = () => {
   }
 
   const handleCategory = (event: any) => {
-    setPrice({ min: 0, max: 0 });
+    setPrice({ min: 0, max: 10000 });
     setSorting("");
     setSelectedCategory(event.target.value);
     reset();
   };
 
   const handleAss = (event: any) => {
-    setPrice({ min: 0, max: 0 });
+    setPrice({ min: 0, max: 10000 });
     setSorting("");
     setSorting(event);
     refetch();
   };
 
   const handleAssDiss = (event: any) => {
-    setPrice({ min: 0, max: 0 });
+    setPrice({ min: 0, max: 10000 });
     setSorting("");
     setSorting(event);
     refetch();
@@ -64,7 +65,7 @@ const AllProducts = () => {
 
   const handleShowAll = () => {
     setSelectedCategory("");
-    setPrice({ min: 0, max: 0 });
+    setPrice({ min: 0, max: 10000 });
     setSorting("");
     refetch();
   };
@@ -184,30 +185,3 @@ const AllProducts = () => {
 };
 
 export default AllProducts;
-
-{
-  /* <form className="flex justify-evenly items-center ">
-            <input
-              type="number"
-              placeholder="Min"
-              className="input input-bordered input-secondary w-20 "
-            />
-            <input
-              type="number"
-              placeholder="max"
-              className="input input-bordered input-secondary w-20 "
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-8 cursor-pointer  "
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </form> */
-}

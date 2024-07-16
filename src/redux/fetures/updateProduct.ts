@@ -5,7 +5,7 @@ export const updateProductApi = baseApi.injectEndpoints({
     updateProduct: builder.mutation({
       query: (data) => {
         return {
-          url: "/products",
+          url: "/products/update",
           method: "PATCH",
           body: data,
         };

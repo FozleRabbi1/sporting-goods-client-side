@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import React from "react";
 // import { allProducts } from "../../redux/fetures/getAllProducts";
 // import ManageSIngleCart from "./ManageSIngleCart";
@@ -174,9 +175,9 @@ const ManageProducts = () => {
     description: "",
   });
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { id: any; value: any } }) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -184,7 +185,7 @@ const ManageProducts = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const { price, rating, stock, ...spred } = formData;
     const newData = {
@@ -205,15 +206,21 @@ const ManageProducts = () => {
       image: "",
       description: "",
     });
-    modalRef.current.close();
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
   };
 
   const handleOpenModal = () => {
-    modalRef.current.showModal();
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
   };
 
   const handleCloseModal = () => {
-    modalRef.current.close();
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
   };
 
   return (
@@ -234,7 +241,7 @@ const ManageProducts = () => {
           <span className="loading loading-spinner loading-lg"></span>
         </div>
       ) : (
-        getData?.map((item) => (
+        getData?.map((item: any) => (
           <ManageSIngleCart data={item} key={item._id}></ManageSIngleCart>
         ))
       )}

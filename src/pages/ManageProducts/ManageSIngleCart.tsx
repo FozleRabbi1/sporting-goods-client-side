@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteProductApi } from "../../redux/fetures/deleteProduct";
@@ -5,12 +6,12 @@ import { toast } from "sonner";
 import { useRef, useState } from "react";
 import { updateProductApi } from "../../redux/fetures/updateProduct";
 
-const ManageSIngleCart = ({ data }) => {
+const ManageSIngleCart = ({ data }: any) => {
   const [deleteProduct] = deleteProductApi.useDeleteProductMutation();
   const [getId, setGetId] = useState("");
   const [updateProduct] = updateProductApi.useUpdateProductMutation();
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     toast("Are you sure you want to delete?", {
       action: {
         label: "Delete",
@@ -33,9 +34,9 @@ const ManageSIngleCart = ({ data }) => {
     description: "",
   });
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { id: any; value: any } }) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -43,7 +44,7 @@ const ManageSIngleCart = ({ data }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const { price, rating, stock, ...spred } = formData;
     const updateNewData = {
@@ -53,10 +54,12 @@ const ManageSIngleCart = ({ data }) => {
       stockQuantity: parseInt(stock),
       ...spred,
     };
-    const filterData = (updateNewData) => {
+    const filterData = (
+      updateNewData: { [s: string]: unknown } | ArrayLike<unknown>
+    ) => {
       return Object.fromEntries(
         Object.entries(updateNewData).filter(
-          ([key, value]) => value !== "" && !Number.isNaN(value)
+          ([value]) => value !== "" && !Number.isNaN(value)
         )
       );
     };
@@ -73,16 +76,22 @@ const ManageSIngleCart = ({ data }) => {
       description: "",
     });
     window.location.reload();
-    modalRef.current.close();
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
   };
 
-  const handleOpenModal = (id) => {
+  const handleOpenModal = (id: string) => {
     setGetId(id);
-    modalRef.current.showModal();
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
   };
 
   const handleCloseModal = () => {
-    modalRef.current.close();
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
   };
 
   return (

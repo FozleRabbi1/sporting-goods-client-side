@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Rating from "react-rating";
-import "./Card.css";
+import React from "react";
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import Rating from "react-rating";
 import { NavLink } from "react-router-dom";
+const RatingComponent: React.ComponentType<any> = Rating as any;
 
-const Cart = (data: any) => {
+const Cart: React.FC<{ item: any }> = ({ item }) => {
   const {
     _id,
     name,
@@ -16,10 +17,11 @@ const Cart = (data: any) => {
     description,
     price,
     image,
-  } = data.item;
+  } = item;
+
   return (
     <div data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000">
-      <div className=" border  group" key={data._id}>
+      <div className=" border  group" key={_id}>
         <div className="h-[300px] w-[100%] overflow-hidden">
           <img
             className="h-[100%] w-[100%] mx-auto  transform transition-transform duration-500 group-hover:scale-110"
@@ -32,14 +34,13 @@ const Cart = (data: any) => {
           <p className="card-description text-[14px] opacity-90">
             {description.slice(0, 45)} ...
           </p>
-          <Rating
-            {...data.item}
+          <RatingComponent
             readonly
             placeholderRating={rating}
             emptySymbol={<CiStar />}
             placeholderSymbol={<FaStar className="text-yellow-500" />}
             fullSymbol={<FaStar />}
-          />
+          ></RatingComponent>
           <div className="flex justify-between">
             <span>
               <p className="text-[12px]">brand : {brand}</p>

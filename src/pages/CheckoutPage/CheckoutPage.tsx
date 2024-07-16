@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAddToCartProduct } from "../../redux/fetures/Cart/getCartProduct";
 import { useNavigate } from "react-router-dom";
 import { checkOutProducts } from "../../redux/fetures/Cart/checkOut";
@@ -36,6 +36,7 @@ const CheckoutPage = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    console.log(39, filterData);
     checkOut(filterData);
     refetch();
     navlink("/thankYou");

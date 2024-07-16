@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../../redux/fetures/getSingleProducts";
 import { addToCart } from "../../redux/fetures/Cart/addToCard";
 import { toast } from "sonner";
+const RatingComponent: React.ComponentType<any> = Rating as any;
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const SingleProductPage = () => {
           <p className="card-description text-[14px] opacity-90">
             {description}
           </p>
-          <Rating
+          <RatingComponent
             readonly
             placeholderRating={rating}
             emptySymbol={<CiStar />}
